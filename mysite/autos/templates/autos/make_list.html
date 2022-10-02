@@ -21,6 +21,8 @@
         {% for mk in make_list%}
         <li>
             {{mk.name}}
+            <a href="{% url 'autos:make_update' mk.id %}">Update</a>
+
         </li>
         {% endfor %}
         </ul>

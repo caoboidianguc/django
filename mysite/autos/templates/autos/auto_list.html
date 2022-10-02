@@ -27,9 +27,15 @@
         {% else %}
         <p>There no Autos in the library.</p>
         {% endif %}
-        <p>Hang Xe: {{ make_count }} </p>
+        {% if make_count > 0 %}
+        <a href="{% url 'autos:auto_create' %}">Add an auto</a>
+        {% else %}
+        <p> Please add a make before you add a auto</p>
+        {% endif %}
+        <p>Da co: {{ make_count }} hang xe.</p>
         <p>
             <a href="{% url 'autos:make_list' %}">View make</a>
+            |-|
             <a href="{% url 'autos:make_create' %}">Add a make</a>
         </p>
 
