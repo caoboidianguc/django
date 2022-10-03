@@ -89,8 +89,24 @@ class MakeUpdate(LoginRequiredMixin, View):
         form.save()
         return redirect(self.success_url)
 
-class MakeDelete():
-    pass
+class MakeDelete(LoginRequiredMixin, View):
+    model = Make
+    template = 'autos/make_confirm_delete.html'
+    success_url = reverse_lazy('autos:all')
+    
+    def get(self, request, pk):
+        make = get_object_or_404(self.model, pk=pk)
+        #form = MakeForm(instance=make)
+        #line 99 was on the sampels of dj4e, it work fine without it
+        kontext = {'make': make}
+        return render(request, self.template, kontext )
+    
+    def post(self, request, pk):
+        make = get_object_or_404(self.model, pk=pk)
+        make.delete()
+        return redirect(self.success_url)
+
+
 
 class AutoUpdate(LoginRequiredMixin, UpdateView):
     model = Auto
@@ -99,7 +115,7 @@ class AutoUpdate(LoginRequiredMixin, UpdateView):
 
 class AutoDelete(LoginRequiredMixin, DeleteView):
     model = Auto
-    fields = 'all'
+    fields = '__all__'
     success_url = reverse_lazy('autos:all')
     
 #use reverse_lazy rather than reverse in the class attributes
