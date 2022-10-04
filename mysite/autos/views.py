@@ -98,7 +98,7 @@ class MakeDelete(LoginRequiredMixin, View):
         make = get_object_or_404(self.model, pk=pk)
         #form = MakeForm(instance=make)
         #line 99 was on the sampels of dj4e, it work fine without it
-        kontext = {'make': make}
+        kontext = {'hangxe': make}
         return render(request, self.template, kontext )
     
     def post(self, request, pk):
