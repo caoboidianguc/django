@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Danh sach auto</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        {% extends 'base_bootstrap.html' %}
+    </head>
+    <body>
+        {% block content %}
+        <h1>Soon, there will be a list of Make and Autos! </h1>
+        {% if auto_list %}
+        <ul>
+        {% for auto in auto_list%}
+        <li>
+            {{auto.nickname}} {{ auto.make}}
+            <p>
+                <a href="{% url 'autos:auto_update' auto.id %}">Update</a>
+                -hay-
+                <a href="{% url 'autos:auto_delete' auto.id %}">Delete</a>
+            </p>
+        </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <p>There no Autos in the library.</p>
+        {% endif %}
+        {% if make_count > 0 %}
+        <a href="{% url 'autos:auto_create' %}">Add an auto</a>
+        {% else %}
+        <p> Please add a make before you add a auto</p>
+        {% endif %}
+        <p>Da co: {{ make_count }} hang xe.</p>
+        <p>
+            <a href="{% url 'autos:make_list' %}">View make</a>
+            |-|
+            <a href="{% url 'autos:make_create' %}">Add a make</a>
+        </p>
+
+
+        {% endblock %}
+        <script src="" async defer></script>
+    </body>
+</html>

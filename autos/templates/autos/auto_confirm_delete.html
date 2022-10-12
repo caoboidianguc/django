@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Xac-thuc Xoa</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        {% extends 'base_bootstrap.html' %}
+    </head>
+    <body>
+        {% block content %}
+
+        <h1>Xac Nhan Delete Auto</h1>
+        <div>Are you sure you want to delete the vehicle: {{ auto }} ?</div>
+        <form action="" method='post'>
+            {% csrf_token %}
+            <input type="submit" value="Yes, delete.">
+            <input type="submit" onclick="window.location='{% url 'autos:all' %}' ; return false; " value="Cancel" >
+
+        </form>
+
+        {% endblock %}
+        
+        <script src="" async defer></script>
+    </body>
+</html>
