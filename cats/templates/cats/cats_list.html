@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>List of Cats</title>
         <meta name="description" content="">
+        <meta name="dj4e-code" content="42166586094378">
+        <meta name="dj4e" content="b043afb8c56c57b7a4015bbc613de3d4"> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
     </head>
@@ -21,6 +19,7 @@
             <ul>
                 <li><p>Ten:{{ meo.nickname }}, Breed:{{ meo.breed }}, Thich an: {{meo.foods}},
                     {{meo.weight}}-Kg 
+                    <a href="{% url 'cats:cat_update' meo.id %}">Update</a>-Or-
                     <a href="{% url 'cats:cat_delete' meo.id %}">Delete</a>
                 </p> </li>
             </ul>
@@ -38,7 +37,7 @@
         {% endif %}
         <strong>Breed: {{ tong_breed }}</strong>
         <div>
-            <a href="{% url 'cats:view_breed' %}">View Breed</a>||
+            <a href="{% url 'cats:view_breed' %}">View Breed</a>-||
             <a href="{% url 'cats:add_breed' %}">Add Breed</a>
         </div>
 
