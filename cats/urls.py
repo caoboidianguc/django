@@ -12,4 +12,6 @@ urlpatterns = [
     path('create/breed/', views.BreedCreate.as_view(), name='add_breed'),
     path('delete/cat/<int:pk>/', views.CatDelete.as_view(), name='cat_delete'),
     path('delete/breed/<int:pk>/', views.BreedDelete.as_view(), name='breed_delete'),
+    path('update/cat/<int:pk>/', views.CatUpdate.as_view(), name='cat_update'),
+    path('update/breed/<int:pk>/', views.BreedUpdate.as_view(), name='breed_update'),
 ]

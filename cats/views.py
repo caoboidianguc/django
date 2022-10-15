@@ -7,7 +7,7 @@ from cats.models import Cat, Breed
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+#from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 
@@ -32,7 +32,8 @@ class BreedCreate(LoginRequiredMixin, View):
     template = "cats/breed_form.html"
     def get(self, request):
         form = BreedForm()
-        contxt = {"giong": form}
+        contxt = {"giong": form} 
+        #neu chon key=giong thi tatca contxt-Form phai co key=giong(BreedUpdate)
         return render(request, self.template, contxt)
     def post(self, request):
         form = BreedForm(request.POST)
@@ -98,7 +99,21 @@ class CatUpdate(LoginRequiredMixin, View):
     model = Cat
     success_url = reverse_lazy('cats:allcats')
     template = "cats/cat_form.html"
-    pass
+    
+    def get(self, request, pk):
+        getCat = get_object_or_404(self.model, pk=pk)
+        form = CatForm(instance=getCat)
+        contxt = {"form": form}
+        return render(request, self.template, contxt)
+    
+    def post(self, request, pk):
+        getCat = get_object_or_404(self.model, pk=pk)
+        form = CatForm(request.POST, instance=getCat)
+        if not form.is_valid():
+            contxt = {'form': form}
+            return render(request, self.template, contxt)
+        form.save()
+        return redirect(self.success_url)
 
 
 
@@ -106,4 +121,18 @@ class BreedUpdate(LoginRequiredMixin, View):
     model = Breed
     success_url = reverse_lazy('cats:allcats')
     template = "cats/breed_form.html"
-    pass
+    
+    def get(self, request, pk):
+        getBreed = get_object_or_404(self.model, pk=pk)
+        form = BreedForm(instance=getBreed)
+        contxt = {'giong': form}
+        return render(request, self.template, contxt)
+    
+    def post(self, request, pk):
+        getBreed = get_object_or_404(self.model, pk=pk)
+        form = BreedForm(request.POST, instance=getBreed)
+        if not form.is_valid():
+            cont = {'giong': form}
+            return render(request, self.template, cont)
+        form.save()
+        return redirect(self.success_url)
