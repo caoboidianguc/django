@@ -1,3 +1,4 @@
+from pyexpat import model
 import re
 from django import views
 from django.shortcuts import redirect, render, get_object_or_404
@@ -57,3 +58,52 @@ class CatCreate(LoginRequiredMixin, View):
             return render(request, self.template, contxt)
         cat = form.save()
         return redirect(self.success_url)
+    
+
+class CatDelete(LoginRequiredMixin, View):
+    model = Cat
+    success_url = reverse_lazy('cats:allcats')
+    template = "cats/cat_confirm_delete.html"
+    
+    def get(self, request, pk):
+        getThatCat = get_object_or_404(self.model, pk=pk)
+        contxt = {'cat': getThatCat}
+        return render(request, self.template, contxt)
+    
+    def post(self, request, pk):
+        getCat = get_object_or_404(self.model, pk=pk)
+        getCat.delete()
+        return redirect(self.success_url)
+
+
+
+class BreedDelete(LoginRequiredMixin, View):
+    model = Breed
+    success_url = reverse_lazy('cats:allcats')
+    template = "cats/breed_confirm_delete.html"
+    
+    def get(self, request, pk):
+        getBreed = get_object_or_404(self.model, pk=pk)
+        contxt = {"giong": getBreed}
+        return render(request, self.template, contxt)
+    
+    def post(self, request, pk):
+        getBreed = get_object_or_404(self.model, pk=pk)
+        getBreed.delete()
+        return redirect(self.success_url)
+
+
+
+class CatUpdate(LoginRequiredMixin, View):
+    model = Cat
+    success_url = reverse_lazy('cats:allcats')
+    template = "cats/cat_form.html"
+    pass
+
+
+
+class BreedUpdate(LoginRequiredMixin, View):
+    model = Breed
+    success_url = reverse_lazy('cats:allcats')
+    template = "cats/breed_form.html"
+    pass

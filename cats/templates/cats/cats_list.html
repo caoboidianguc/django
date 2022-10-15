@@ -20,7 +20,8 @@
         <div>
             <ul>
                 <li><p>Ten:{{ meo.nickname }}, Breed:{{ meo.breed }}, Thich an: {{meo.foods}},
-                    {{meo.weight}}-Kg
+                    {{meo.weight}}-Kg 
+                    <a href="{% url 'cats:cat_delete' meo.id %}">Delete</a>
                 </p> </li>
             </ul>
         </div>

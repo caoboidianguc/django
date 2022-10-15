@@ -24,7 +24,7 @@
                     {{ breed.name }}
                 <a href="">Update</a>
                 -Hoac-
-                <a href="">Delete</a>
+                <a href="{% url 'cats:breed_delete' breed.id %}">Delete</a>
                 </div>
             </li>
         </ul>
